@@ -5,7 +5,10 @@
   "dependencies": {
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
+    "react-scripts": "2.1.1",
+    "socket.io": "^2.1.1",
+    "socket.io-client": "^2.1.1",
+    "uws": "^99.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,6 +26,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "dagre": "^0.8.2"
+    "d3": "^5.7.0",
+    "dagre": "^0.8.2",
+    "dagre-d3": "^0.6.1"
   }
 }
