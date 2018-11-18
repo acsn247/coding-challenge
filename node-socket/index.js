@@ -24,6 +24,39 @@ server = app.listen(4000, () => {
   console.log("Listen port 4000");
 });
 
+// function gen(v, e) {
+//   const r = [];
+
+//   const edges = {};
+//   const nodes = [];
+//   for (let i = 0; i < v; i++) {
+//     nodes.push(i);
+//     const nodeParents = [];
+//     if (i > 0) {
+//       const parent = rand() % i;
+//       nodeParents.push(parent);
+//       e--;
+
+//       edges[`${parent}${i}`] = true;
+//     }
+//     r.push(nodeParents);
+//   }
+
+//   while (e > 0) {
+//     const child = (rand() % (v - 1)) + 1;
+//     const parent = rand() % child;
+
+//     if (!edges[`${parent}${child}`]) {
+//       edges[`${parent}${child}`] = true;
+//       r[child].push(parent);
+//       e--;
+//     }
+//   }
+
+//   console.log(111, r);
+//   return r;
+// }
+
 function gen(v, e) {
   const r = [];
 
@@ -53,7 +86,17 @@ function gen(v, e) {
     }
   }
 
-  return r;
+  const result = r.map((parents, index) => {
+    return { id: index, status: getRandomInt(0, 2), parents };
+  });
+
+  return result;
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function rand() {

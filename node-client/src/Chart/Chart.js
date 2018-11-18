@@ -9,6 +9,12 @@ const render = new dagreD3.render();
 // // Create a new directed graph
 let g = new dagre.graphlib.Graph();
 
+const colorNodeMap = {
+  0: "blue",
+  1: "green",
+  2: "yellow"
+};
+
 export default class Chart extends React.PureComponent {
   componentDidMount() {
     const { data } = this.props;
@@ -62,14 +68,15 @@ export default class Chart extends React.PureComponent {
 
   renderDirectedChart = (g, data) => {
     for (let i = 0; i <= data.length; i++) {
-      if (data[i] && data[i].length > 0) {
-        g.setNode(i, {
-          label: i,
-          style: "fill: #afa"
+      if (data[i]) {
+        const nodeColor = colorNodeMap[data[i].status];
+        g.setNode(data[i].id, {
+          label: data[i].id,
+          style: `fill: ${nodeColor}`
         });
-        for (let j = 0; j <= data[i].length; j++) {
-          if (data[i][j]) {
-            g.setEdge(data[i][j], i, {
+        for (let j = 0; j <= data[i].parents.length; j++) {
+          if (data[i].parents[j]) {
+            g.setEdge(data[i].parents[j], data[i].id, {
               style:
                 "fill: none; stroke: #f66; stroke-width: 3px; stroke-dasharray: 5, 5;",
               arrowheadStyle: "fill: #f66"

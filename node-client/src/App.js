@@ -21,7 +21,7 @@ class App extends Component {
         .then(json => json.json())
         .then(res => {
           console.log("data", res);
-          if (res && res) {
+          if (res) {
             this.setState({
               data: res
             });
