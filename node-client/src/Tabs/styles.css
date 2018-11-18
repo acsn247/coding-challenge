@@ -1,0 +1,24 @@
+.tabs {
+  background: gray;
+}
+
+.tab-list {
+  display: flex;
+  flex-direction: row;
+}
+
+.tab {
+  padding: 20px;
+  background: white;
+}
+
+.tab.active {
+  background: pink;
+  color: blue;
+}
+
+.tab-panel {
+  background: burlywood;
+  flex: 1;
+  padding: 30px;
+}
