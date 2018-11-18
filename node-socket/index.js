@@ -1,12 +1,23 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
 
+// support parsing of application/json type post data
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
   res.send("Hello world");
+});
+
+app.get("/transactions", (req, res) => {
+  const { limit, offset } = req.query;
+  console.log("Get Transaction, ", limit, offset);
+  res.json(gen(limit, offset));
 });
 
 server = app.listen(4000, () => {
@@ -49,10 +60,10 @@ function rand() {
   return Math.round(Math.random() * 100000);
 }
 
-const io = require("socket.io")(server);
-io.on("connection", socket => {
-  console.log("New user connected");
-  setInterval(() => {
-    socket.emit("change_data", { data: gen(10, 12) });
-  }, 2000);
-});
+// const io = require("socket.io")(server);
+// io.on("connection", socket => {
+//   console.log("New user connected");
+//   setInterval(() => {
+//     socket.emit("change_data", { data: gen(10, 10) });
+//   }, 2000);
+// });
